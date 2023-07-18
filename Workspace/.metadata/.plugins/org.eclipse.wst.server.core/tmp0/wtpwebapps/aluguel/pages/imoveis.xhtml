@@ -112,35 +112,28 @@
 					requiredMessage="O campo cidade é obrigatorio" />
 				
 					<p:outputLabel value="UF:" imo="txtImov6Novo" />
-					<p:inputText size="10" maxlength="50" id="txtImov6Novo"
+					<p:inputText size="2" maxlength="50" id="txtImov6Novo"
 					value="#{MBImoveis.imoveis.uf}" required="true" 
 					requiredMessage="O campo estado é obrigatorio" />
 				
 					<p:outputLabel value="Cep:" imo="txtImov7Novo" />
-					<p:inputText size="10" maxlength="50" id="txtImov7Novo"
-					value="#{MBImoveis.imoveis.cep}" required="true" 
-					requiredMessage="O campo cep é obrigatorio" />
-					
+				    <p:inputMask size="8" maxlength="50" value="#{MBImoveis.imoveis.cep}" required="true"
+           			 mask="99999-999"></p:inputMask>
+     				
 					<p:outputLabel value="Andar:" imo="txtImov8Novo" />
-					<p:inputText size="10" maxlength="50" id="txtImov8Novo"
+					<p:inputText size="4" maxlength="50" id="txtImov8Novo"
 					value="#{MBImoveis.imoveis.andar}" required="true" 
 					requiredMessage="O campo andar é obrigatorio" />
 					
 					<p:outputLabel value="Valor do Aluguel" imo="txtImov9Novo" />
-					<p:inputText size="10" maxlength="50" id="txtImov9Novo"
-					value="#{MBImoveis.imoveis.valoraluguel}" required="true" 
-					requiredMessage="O campo valor do aluguel é obrigatorio" />
+					<p:inputNumber size="10" value="#{MBImoveis.imoveis.valoraluguel}" />
 					
 					<p:outputLabel value="Valor do Condominio" imo="txtImov10Novo" />
-					<p:inputText size="10" maxlength="50" id="txtImov10Novo"
-					value="#{MBImoveis.imoveis.valorcondominio}" required="true" 
-					requiredMessage="O campo valor do condominio é obrigatorio" />
+					<p:inputNumber size="10" value="#{MBImoveis.imoveis.valorcondominio}" />
 					
 					<p:outputLabel value="Valor do Iptu" imo="txtImov11Novo" />
-					<p:inputText size="10" maxlength="50" id="txtImov11Novo"
-					value="#{MBImoveis.imoveis.valoriptu}" required="true" 
-					requiredMessage="O campo valor do iptu é obrigatorio" />
-									
+					<p:inputNumber size="10" value="#{MBImoveis.imoveis.valoriptu}" />
+					 									
 					<p:commandButton value="Gravar"
 					actionListener="#{MBImoveis.novo}"
 					oncomplete="verificar(xhr, status, args, 'dlgimoNovo', 'tbimoveis');"
