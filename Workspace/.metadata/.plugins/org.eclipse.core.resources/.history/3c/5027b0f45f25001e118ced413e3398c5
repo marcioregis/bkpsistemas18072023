@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	
+	>
+
+
+	<h:form>
+		<div class="card">
+		<div class="flex justify-content-between">
+ 		</div>
+		
+    	<p:dataTable id="tbInquilinos"  var="item" value="#{MBInquilinos.itens}">
+        	
+
+			<p:column>
+	          	<div class="flex justify-content-between align-items-center">
+                	<font size="5" ><strong> RECIBO</strong> </font><br/>
+                	------------------------------------------------------------------------------------            	
+                </div>
+  		
+   				<h:outputText value="Recebemos de " styleClass="text-secondary" />
+    	        <h:outputText value="#{item.nomeinq}"/><br/><br/>
+    	        <h:outputText value="O volor de " styleClass="text-secondary" />
+    	        <h:outputText  /><br/><br/>    	     
+    	          
+    	        <h:outputText value="Correspondente ao pagamento do mes de" /><br/><br/>
+    	        <h:outputText value="Assinatura_______________________________________________"  /><br/><br/><br/>
+        </p:column>
+        
+    </p:dataTable>
+    <h:commandButton value="Print" >
+       <f:actionListener type="br.com.famarcia.domain.GeraRelatorio" />
+  
+    </h:commandButton>
+      
+   
+    
+</div>
+</h:form>
+
+</ui:composition>

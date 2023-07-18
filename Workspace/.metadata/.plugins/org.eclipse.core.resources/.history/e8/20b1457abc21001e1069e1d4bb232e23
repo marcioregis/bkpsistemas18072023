@@ -1,0 +1,10 @@
+package br.com.farmacia.domain;
+
+import javax.xml.ws.ServiceMode;
+
+@ServiceMode
+public class ServiceRelatorio {
+	
+	@Autowired
+	private JdbcTemplate jdbcTemplate;
+}

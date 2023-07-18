@@ -1,0 +1,25 @@
+package br.com.farmacia.util;
+
+import java.awt.List;
+import java.io.File;
+import java.util.HashMap;
+import javax.faces.context.FacesContext;
+
+public class UtilRelatorios {
+
+	public static <JRBeanCollectionDataSource> void imprimeRelatorio(String relatorioNome, HashMap parametros, List lista){
+		try {
+			JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(lista);
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+			facesContext.responseComplete();
+			ServletContext scontext = (ServletContext)facesContext.getExternalContext().getContext(); 
+			String path = scontext.getRealPath("/relatorios");
+			parametros.put("SUBREPORT_DIR", path + File.separator);
+			JasperPrint jasperPrint = JasperFillManager.fillReport
+			
+		} catch (Exception e) {
+		
+		}
+	}
+	
+}

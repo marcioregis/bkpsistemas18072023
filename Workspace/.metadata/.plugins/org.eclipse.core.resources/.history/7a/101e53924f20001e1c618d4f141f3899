@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html"
+	>
+
+	<h:form>
+		<div class="card">
+		<div class="flex justify-content-between">
+		</div>
+		
+    	<p:dataTable id="tbImoveis"  var="item" value="#{MBImoveis.itens}">
+        	<f:facet name="header">
+            	<div class="flex justify-content-between align-items-center">
+                	Lista de Imoveis
+				<!--  Mostra o botao colunas -->
+            </div>
+       		 </f:facet>
+
+				<p:column headerText="Código"> 
+					<h:outputText value="#{item.codigo}" />
+				</p:column>
+
+				<p:column headerText="Nome Imovel"> 
+					<h:outputText value="#{item.nome}" />
+				</p:column>
+
+				<p:column headerText="Endereco"> 
+					<h:outputText value="#{item.endereco}" />
+				</p:column>
+				
+				<p:column headerText="Bairro"> 
+					<h:outputText value="#{item.bairro}" />
+				</p:column>
+		
+				<p:column headerText="Cidade"> 
+					<h:outputText value="#{item.cidade}" />
+				</p:column>
+				
+				<p:column headerText="Uf"> 
+					<h:outputText value="#{item.uf}" />
+				</p:column>
+				
+				<p:column headerText="Cep"> 
+					<h:outputText value="#{item.cep}" />
+				</p:column>
+    </p:dataTable>
+    
+   <div class="card">
+    
+    
+    <h:commandLink>
+		<p:graphicImage title="Exporta" library="images" name="excel2.png"  />
+		<p:dataExporter type="xls" target="tbImoveis" fileName="iquilinos" />
+	</h:commandLink>
+    
+    
+   </div> 
+ 	 
+		
+</div>
+</h:form>
+</ui:composition>

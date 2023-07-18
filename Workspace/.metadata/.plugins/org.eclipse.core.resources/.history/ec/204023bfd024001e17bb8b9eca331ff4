@@ -1,0 +1,14 @@
+package br.com.farmacia.domain;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+
+import br.com.farmacia.factory.ConexaoFactory;
+
+public class GeraRelatorio {
+	public GeraRelatorio() throws SQLException {
+		Connection conexao = ConexaoFactory.conectar();
+		
+		
+	}
+}

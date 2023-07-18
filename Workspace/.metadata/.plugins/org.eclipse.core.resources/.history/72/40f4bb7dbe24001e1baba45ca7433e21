@@ -1,0 +1,22 @@
+package br.com.farmacia.util;
+
+import java.awt.List;
+import java.util.HashMap;
+import javax.faces.context.FacesContext;
+
+public class UtilRelatorios {
+
+	public static <JRBeanCollectionDataSource> void imprimeRelatorio(String relatorioNome, HashMap paremetros, List lista){
+		try {
+			JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(lista);
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+			facesContext.responseComplete();
+			ServletContext scontext = (ServletContext)facesContext.getExternalContext().getContext(); 
+			String path = scontext.getRealPath("/relatorios");
+			
+		} catch (Exception e) {
+		
+		}
+	}
+	
+}

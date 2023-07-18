@@ -1,0 +1,16 @@
+package br.com.farmacia.domain;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+
+import br.com.farmacia.factory.ConexaoFactory;
+
+public class GeraRelatorio {
+	public GeraRelatorio() {
+		Connection conexao = ConexaoFactory.conectar();
+		JasperReport jasperReport = javax.CompileManger.
+		
+		
+		
+	}
+}

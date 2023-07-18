@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html"
+	>
+
+
+	<div class="card">
+      <h:form>
+    	<div class="flex justify-content-between align-items-center">
+              Recibo
+        </div>
+    
+         <h:panelGrid  columns="2">
+ 
+ 			<p:panel id="receb" header="Recebemos de">
+            	<h:outputText value="#{MBInquilinos.inquilinos.nomeinq}"/>
+        	</p:panel>
+        	
+ 			<p:panel id="receb2" header="A quantia de ">
+            	<h:outputText value="#{MBInquilinos.inquilinos.nomeinq}"/>
+        	</p:panel>
+        	
+
+        	
+        </h:panelGrid>
+    	
+           
+    </h:form>
+   </div>
+
+</ui:composition>

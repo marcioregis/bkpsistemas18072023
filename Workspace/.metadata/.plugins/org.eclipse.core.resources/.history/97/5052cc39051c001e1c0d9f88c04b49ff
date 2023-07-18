@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/modeloSistema.xhtml">
+
+	<ui:define name="menu">
+		<ui:include src="/includes/menu.xhtml" />
+	</ui:define>
+
+    <!--  Inicio da tela Lista de Inquilinos -->
+	<ui:define name="conteudo">
+	<h:form id="frmInquilinos">
+			<p:dataTable id="tbInquilinos" widgetVar="tabelaInquilinos"
+				emptyMessage="Nenhum registro encontrado!"
+				value="#{MBInquilinos.itens}" var="item"
+				filteredValue="#{MBInquilinos.itensFiltrados}" paginator="true"
+				rows="7">
+
+				<f:facet name="header">Lista de Inquilinos</f:facet>
+				
+				<p:column headerText="Código" sortBy="#{item.codigo}"
+					filterBy="#{item.codigo}">
+					<h:outputText value="#{item.codigo}" />
+				</p:column>
+
+				<p:column headerText="NomeInq" sortBy="#{item.nomeinq}"
+					filterBy="#{item.nomeinq}">
+					<h:outputText value="#{item.nomeinq}" />
+				</p:column>
+
+				<p:column headerText="Endereco" sortBy="#{item.endereco}"
+					filterBy="#{item.endereco}">
+					<h:outputText value="#{item.endereco}" />
+				</p:column>
+
+				<p:column headerText="Valor" sortBy="#{item.valor}"
+					filterBy="#{item.valor}">
+					<h:outputText value="#{item.valor}" />
+				</p:column>
+
+				<p:column headerText="Imovel" sortBy="#{item.imoveis.nome}"
+					filterBy="#{item.imoveis.nome}">
+					<h:outputText value="#{item.imoveis.nome}" />
+				</p:column>
+
+				<p:column headerText="Opções">
+					<p:commandButton icon="ui-icon-trash"
+						oncomplete="PF('dlginqExcluir').show();" update=":frminqExcluir:pninqExcluir">
+						<f:setPropertyActionListener value="#{item}" target="#{MBInquilinos.inquilinos}">
+						</f:setPropertyActionListener>
+					</p:commandButton>
+
+					<p:commandButton icon="ui-icon-pencil"
+						oncomplete="PF('dlginqEditar').show();"
+						update=":frminqEditar:pninqEditar"
+						actionListener="#{MBInquilinos.prepararEditar}">
+						<f:setPropertyActionListener value="#{item}"
+							target="#{MBInquilinos.inquilinos}"></f:setPropertyActionListener>
+					</p:commandButton>
+				</p:column>
+
+				<f:facet name="footer">
+					<p:commandButton value="Novo" oncomplete="PF('dlginqNovo').show();"
+						actionListener="#{MBInquilinos.prepararNovo}"
+						update=":frminqNovo:pninqNovo :msgGlobal" />
+				</f:facet>
+			</p:dataTable>
+		</h:form>
+		<!--  Fim da tela Lista de Inquilinos -->
+
+		<!--  Inicio da tela Cadastrar Inquilinos -->
+		<p:dialog widgetVar="dlginqNovo" closable="false" draggable="false"
+			resizable="false" header="Cadastar Inquilino" modal="true"
+			appendTo="@(body)">
+			<h:form id="frminqNovo">
+			
+				    <h:panelGrid id="pninqNovo" columns="2">    
+					<p:outputLabel value="Nome:" />
+					<h:inputText size="30" maxlength="50"
+					value="#{MBInquilinos.inquilinos.nomeinq}" required="true"
+					requiredMessage="O campo nome é obrigatório." />
+
+           			<p:outputLabel value="Endereco:" />					 
+					<h:inputText size="30" maxlength="50"
+					value="#{MBInquilinos.inquilinos.endereco}" required="true"
+					requiredMessage="O campo endereco é obrigatório." />
+								
+					<p:outputLabel value="Valor do Aluguel:" />
+					<h:inputText size="15" maxlength="50"
+					value="#{MBInquilinos.inquilinos.valor}" required="true"
+					requiredMessage="O campo valor é obrigatório." />
+
+					<p:outputLabel value="Imovel:" />
+					<p:selectOneMenu value="#{MBInquilinos.inquilinos.imoveis.codigo}"
+						filter="true"
+						required="true" requiredMessage="O campo Imovel é obrigatorio."	>
+						<f:selectItem itemValue="" itemLabel="Selecione um Imovel" />
+						<f:selectItems value="#{MBInquilinos.comboImoveis}" var="item"
+							itemValue="#{item.codigo}" itemLabel="#{item.nome}">
+						</f:selectItems>
+					</p:selectOneMenu>
+				</h:panelGrid>
+				
+				<h:panelGrid columns="2">
+					<p:commandButton value="Gravar" actionListener="#{MBInquilinos.novo}"
+						oncomplete="verificar(xhr, status, args, 'dlginqNovo', 'tbInquilinos');"
+						update=":frmInquilinos:tbInquilinos :msgGlobal" />				
+					<p:commandButton value="Cancelar" process="@this" onclick="PF('dlginqNovo').hide();" />
+				</h:panelGrid>
+			</h:form>
+		</p:dialog>
+		<!--  Fim da tela Cadastrar Inquilinos -->
+
+		<!--  Inicio Label Opcoes de Excluir e Editar -->
+		<p:dialog widgetVar="dlginqExcluir" closable="false" draggable="false"
+			resizable="false" header="Excluir Inquilino" modal="true"
+			appendTo="@(body)">
+
+			<h:form id="frminqExcluir">
+				<h:panelGrid id="pninqExcluir" columns="2">
+					<h:outputText value="Código" />
+					<h:outputText value="#{MBInquilinos.inquilinos.codigo}" />
+
+					<h:outputText value="Nome" />
+					<h:outputText value="#{MBInquilinos.inquilinos.nomeinq}" 
+					required="true" 
+					requiredMessage="O campo nome é obrigatório." />
+					
+					<h:outputText value="Endereco" />
+					<h:outputText value="#{MBInquilinos.inquilinos.endereco}" 
+					required="true" 
+					requiredMessage="O campo Endereco é obrigatório." />
+					
+					<h:outputText value="Valor" />
+					<h:outputText value="#{MBInquilinos.inquilinos.valor}" 
+					required="true" 
+					requiredMessage="O campo valor é obrigatório." />
+					
+					<h:outputText value="Imovel" />
+					<p:selectOneMenu value="#{MBInquilinos.inquilinos.imoveis.codigo}"
+					filter="true" required="true"
+					requiredMessage="O campo Imovel é obrigatório." >
+					
+					<f:selectItems value="#{MBInquilinos.comboImoveis}" var="item"
+					itemValue="#{item.codigo}" 
+					itemLabel="#{item.nome}">
+					</f:selectItems>
+					</p:selectOneMenu>
+			
+				</h:panelGrid>
+
+				<h:panelGrid columns="2">
+					<p:commandButton value="Excluir"
+						actionListener="#{MBInquilinos.excluir}"
+						oncomplete="PF('dlginqExcluir').hide(); PF('tabelaInquilinos').clearFilters(); "
+						update=":frmInquilinos:tbInquilinos :msgGlobal" />
+					<p:commandButton value="Cancelar"
+						onclick="PF('dlginqExcluir').hide();" />
+				</h:panelGrid>
+			</h:form>
+		</p:dialog>
+
+		<p:dialog widgetVar="dlginqEditar" closable="false" draggable="false"
+			resizable="false" header="Editar Inquilino" modal="true"
+			appendTo="@(body)">
+
+			<h:form id="frminqEditar">
+				<h:panelGrid id="pninqEditar" columns="2">
+					<h:outputText value="Código" />
+					<h:outputText value="#{MBInquilinos.inquilinos.codigo}" />
+
+					<h:outputText value="Nome" />
+					<h:inputText value="#{MBInquilinos.inquilinos.nomeinq}"
+						required="true" requiredMessage="O campo nome é obrigatório." />
+
+					<h:outputText value="Endereco" />
+					<h:inputText value="#{MBInquilinos.inquilinos.endereco}" required="true"
+						requiredMessage="O campo Endereco é obrigatório." />
+
+					<h:outputText value="Valor" />
+					<h:inputText value="#{MBInquilinos.inquilinos.valor}"
+						required="true"
+						requiredMessage="O campo Valor é obrigatório." />
+
+					<h:outputText value="Imovel" />
+					<p:selectOneMenu value="#{MBInquilinos.inquilinos.imoveis.codigo}"
+						filter="true" required="true"
+						requiredMessage="O campo Imovel é obrigatório.">
+
+						<f:selectItems value="#{MBInquilinos.comboImoveis}" var="item"
+							itemValue="#{item.codigo}" itemLabel="#{item.nome}">
+						</f:selectItems>
+					</p:selectOneMenu>
+				</h:panelGrid>
+
+				<h:panelGrid columns="2">
+					<p:commandButton value="Editar"
+						actionListener="#{MBInquilinos.editar}"
+						oncomplete="verificar(xhr, status, args, 'dlginqEditar', 'tbInquilinos');"
+						update=":frmInquilinos:tbInquilinos :msgGlobal" />
+					<p:commandButton value="Cancelar" process="@this"
+						onclick="PF('dlginqEditar').hide();" />
+				</h:panelGrid>
+			</h:form>
+		</p:dialog>
+		<!--  Fim Label Opcoes Excluir e Editar -->
+		
+	</ui:define>
+</ui:composition>

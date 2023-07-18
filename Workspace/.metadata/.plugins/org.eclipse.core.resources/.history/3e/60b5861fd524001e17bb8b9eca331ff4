@@ -1,0 +1,17 @@
+package br.com.farmacia.domain;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+
+import br.com.farmacia.factory.ConexaoFactory;
+import net.sf.jasperreports.engine.JasperReport;
+
+
+public class GeraRelatorio {
+	public GeraRelatorio() throws SQLException {
+		Connection conexao = ConexaoFactory.conectar();
+		
+		
+		JasperReport = jasperreport = jasperCompileManager("");
+	}
+}

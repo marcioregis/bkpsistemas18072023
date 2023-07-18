@@ -1,0 +1,15 @@
+package br.com.farmacia.domain;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+
+import br.com.farmacia.factory.ConexaoFactory;
+
+public class GeraRelatorio {
+	public GeraRelatorio() {
+		DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
+		Connection conexao = DriverManager.getConnection(URL,USUARIO,SENHA);
+		
+		
+	}
+}

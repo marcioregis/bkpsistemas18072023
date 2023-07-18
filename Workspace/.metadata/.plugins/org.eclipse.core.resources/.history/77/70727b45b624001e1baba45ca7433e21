@@ -1,0 +1,23 @@
+package br.com.farmacia.util;
+
+import java.awt.List;
+import java.util.HashMap;
+import javax.faces.context.FacesContext;
+import net.sf.jasperreports.engine.JasperExportManager;
+
+
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource,
+
+
+public class UtilRelatorios {
+
+	public static void imprimeRelatorio(String relatorioNome, HashMap paremetros, List Lista){
+		try {
+			JRBeanCollectionDataSource dataSource = new JRBeanColletionDataSource(lista);
+			
+		} catch (Exception e) {
+		
+		}
+	}
+	
+}
